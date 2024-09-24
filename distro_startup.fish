@@ -6,6 +6,10 @@ if not command -v fish >/dev/null
 	exit 1
 end
 
+if test (id -u) -ne 0
+	echo "This script must be run as root!"
+	exit 1
+end
 
 if not test (awk -F= '$1=="ID_LIKE" {print $2}' /etc/os-release) = "arch"
 	echo "You are not using Arch Linux"
