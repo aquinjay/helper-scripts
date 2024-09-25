@@ -16,6 +16,11 @@ if not test (awk -F= '$1=="ID_LIKE" {print $2}' /etc/os-release) = "arch"
 	exit 1
 end
 
+# Install packages
+set packages git neovim tree bat chezmoi nodejs npm
+
+pacman -S --needed --noconfirm $packages
+
 # check if I am using garuda linux
 if test (awk -F= '$1=="NAME" {print $2}' /etc/os-release | tr -d '"') = "Garuda Linux"
 
@@ -39,27 +44,3 @@ else
 	echo 'You are not using Garuda Linux'
 	exit 0
 end
-
-# Check if pacman is available
-set packages git neovim tree bat chezmoi nodejs npm
-
-pacman -S --needed --noconfirm $packages
-
-# setup chezmoi dotfile
-#if not test -d ~/.local/share/chezmoi
-#	echo 'Chezmoi init file not available. Initializing file.'
-#	chezmoi init https://github.com/aquinjay/dotfiles.git
-#else
-#	echo 'Chezmoi file already exists.'
-#end
-
-#echo "Setup GitHub Identity"
-#git config --global user.email "afquinteroj@pm.me"
-#git config --global user.name "aquinjay"
-
-# Create git management directories
-#echo "Create Git directories"
-#set base_dir $HOME/Documents/git
-#mkdir -p $base_dir/GitHub $base_dir/GitLab
-
-#echo "Please add ssh agent to fish configuration"
