@@ -17,7 +17,7 @@ if not test (awk -F= '$1=="ID_LIKE" {print $2}' /etc/os-release) = "arch"
 end
 
 # Install packages
-set packages git neovim tree bat chezmoi nodejs npm
+set packages git neovim tree bat chezmoi nodejs npm cmake
 
 pacman -S --needed --noconfirm $packages
 
